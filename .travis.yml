@@ -1,0 +1,10 @@
+language: julia
+notifications:
+  email: false
+julia:
+  - 0.4
+  - nightly
+before_install:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+script:
+  - xvfb-run julia -e 'versioninfo(); Pkg.init(); Pkg.clone(pwd()); Pkg.build("FaceDatasets"); Pkg.test("FaceDatasets")'
